@@ -15,8 +15,10 @@ def divideSet(rows, column, value):
 	splittingFunction = None
 	if isinstance(value, int) or isinstance(value, float): # for int and float values
 		splittingFunction = lambda row : row[column] >= value
+		#splittingFunction = lambda row : int(row[column]) >= value
 	else: # for strings 
-		splittingFunction = lambda row : row[column] == value
+		#splittingFunction = lambda row : row[column] == value
+		splittingFunction = lambda row : int(row[column]) == int(value)
 	
 	list1 = [row for row in rows if splittingFunction(row)]
 	list2 = [row for row in rows if not splittingFunction(row)]
@@ -84,9 +86,10 @@ def growDecisionTreeFrom(rows, evaluationFunction=entropy):
 	for col in range(0, columnCount):
 		columnValues = [row[col] for row in rows]
 		#count = 0
+		#print("col=", col)
 		
 		for value in columnValues:
-			#print(count)
+			#print(count, " val=", value)
 			#count += 1
 			(set1, set2) = divideSet(rows, col, value)
 
